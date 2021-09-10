@@ -13,14 +13,15 @@
 __author__ = 'JHao'
 
 from re import findall
-from requests import head
+from requests import get
 from util.six import withMetaclass
 from util.singleton import Singleton
 from handler.configHandler import ConfigHandler
 
 conf = ConfigHandler()
+userAgent = conf.userAgent
 
-HEADER = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0',
+HEADER = {'User-Agent':  userAgent,
           'Accept': '*/*',
           'Connection': 'keep-alive',
           'Accept-Language': 'zh-CN,zh;q=0.8'}
@@ -62,7 +63,7 @@ def httpTimeOutValidator(proxy):
     proxies = {"http": "http://{proxy}".format(proxy=proxy), "https": "https://{proxy}".format(proxy=proxy)}
 
     try:
-        r = head(conf.httpUrl, headers=HEADER, proxies=proxies, timeout=conf.verifyTimeout)
+        r = get(conf.httpUrl, headers=HEADER, proxies=proxies, timeout=conf.verifyTimeout)
         return True if r.status_code == 200 else False
     except Exception as e:
         return False
@@ -74,7 +75,7 @@ def httpsTimeOutValidator(proxy):
 
     proxies = {"http": "http://{proxy}".format(proxy=proxy), "https": "https://{proxy}".format(proxy=proxy)}
     try:
-        r = head(conf.httpsUrl, headers=HEADER, proxies=proxies, timeout=conf.verifyTimeout, verify=False)
+        r = get(conf.httpsUrl, headers=HEADER, proxies=proxies, timeout=conf.verifyTimeout, verify=False)
         return True if r.status_code == 200 else False
     except Exception as e:
         return False

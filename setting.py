@@ -86,3 +86,6 @@ POOL_SIZE_MIN = 20
 # Otherwise it will detect the timezone from the system automatically.
 
 TIMEZONE = "Asia/Shanghai"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"  
+INTERVAL_FETCH = 60
+INTERVAL_CHECK = 30

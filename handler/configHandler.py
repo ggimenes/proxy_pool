@@ -54,8 +54,20 @@ class ConfigHandler(withMetaclass(Singleton)):
         return os.getenv("HTTPS_URL", setting.HTTPS_URL)
 
     @LazyProperty
+    def userAgent(self):
+        return os.getenv("USER_AGENT", setting.USER_AGENT)
+
+    @LazyProperty
     def verifyTimeout(self):
         return int(os.getenv("VERIFY_TIMEOUT", setting.VERIFY_TIMEOUT))
+
+    @LazyProperty
+    def intervalFetch(self):
+        return int(os.getenv("INTERVAL_FETCH", setting.INTERVAL_FETCH))
+
+    @LazyProperty
+    def intervalCheck(self):
+        return int(os.getenv("INTERVAL_CHECK", setting.INTERVAL_CHECK))
 
     # @LazyProperty
     # def proxyCheckCount(self):
